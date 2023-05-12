@@ -1,29 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import Home from './components/Home';
-import User from './components/user';
 import Navbar from './components/Navbar';
 import AddUser from './components/AddUser';
-
+import User from './components/user';
+import  SearchPage  from './components/SearchPage';
 
 function App(){
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   return (
     <div>
-      
       <Router>
-
-<Navbar />
-
-<Routes >
-<Route path="/" element={ <Home /> } />
-<Route path="/adduser" element={<AddUser />} />
-<Route path="/user" element={ <User /> } />
-
-</Routes>
-
-</Router>
-  </div>
+        <Navbar onSearchChange={handleSearchChange} searchQuery={searchQuery}/>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/adduser" element={<AddUser />} />
+          <Route path="/users/:id" element={<User />} />
+          <Route path="/search" element={<SearchPage />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

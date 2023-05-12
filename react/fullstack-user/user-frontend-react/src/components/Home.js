@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+function UserDetail({ user }) {
+    return (
+      <div className="card">
+        <div className="card-body">
+          <h5 className="card-title">{`${user.firstname} ${user.lastname}`}</h5>
+          <h6 className="card-subtitle mb-2 text-muted">{user.email}</h6>
+          <h6>id:{user.id}</h6>
+        </div>
+      </div>
+    );
+  }
 function Home() {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
@@ -51,26 +62,45 @@ function Home() {
 
     return (
         <div className="container">
-            <h1>UserList</h1>
-            <div className="row">
-                {users.map(user => (
-                    <div className="col-md-4 mb-3" key={user.id}>
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">{user.firstname} {user.lastname}  </h5>
-                                <h6 className="card-subtitle mb-2 text-muted">{user.email} </h6>
-                                <h6>id:{user.id}</h6>
-                                <button type="button" className="btn btn-primary mr-2" onClick={() => handleSelectUser(user)}>
-                                    Update
-                                </button>
-                                <button type="button" className="btn btn-danger" onClick={() => handleDeleteUser(user.id)}>
-                                    Delete
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+        <h1>UserList</h1>
+        <table className="table">
+          <thead>
+            <tr>
+            <th>Image</th>
+
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user.id}>
+                <td><img src={user.image_src} width="75" height="75"></img></td>
+                <td><a href={`/users/${user.id}`}>{user.firstname}</a></td>
+                <td><a href={`/users/${user.id}`}>{user.lastname}</a></td>
+                <td>{user.email}</td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn btn-primary mr-2"
+                    onClick={() => handleSelectUser(user)}
+                  >
+                    Update
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => handleDeleteUser(user.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
             {selectedUser && (
                 <div className="row mt-3">
                     <div className="col-md-4 offset-md-4">
@@ -91,7 +121,7 @@ function Home() {
 
                                         <input type="email" className="form-control" id="email" name="email" value={updatedUser.email || ''} onChange={handleInputChange} />
                                     </div>
-                                    
+
                                     <button type="submit" className="btn btn-primary mr-2">
                                         Update User
                                     </button>

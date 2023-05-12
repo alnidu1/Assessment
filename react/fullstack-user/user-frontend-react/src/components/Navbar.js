@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Navbar.css"; 
+import "./Navbar.css";
 
-function Navbar() {
+function Navbar({ onSearchChange, onSearchSubmit }) {
+  const [searchQuery, setSearchQuery] = useState("");
+
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+    onSearchChange(event.target.value);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    onSearchSubmit(searchQuery);
+  };
+
   return (
     <nav className="navbar">
       <ul className="navbar-nav">
@@ -17,12 +30,12 @@ function Navbar() {
             AddUser
           </Link>
         </li>
+
         <li className="nav-item">
-          <Link to="/user" className="nav-link">
-            User
+        <Link to="search" className="nav-link">
+            Search
           </Link>
         </li>
-       
       </ul>
     </nav>
   );

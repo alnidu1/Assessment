@@ -54,6 +54,11 @@ public class UserController {
 	 public void delete(@PathVariable int id) {
 		 repo.deleteById(id);
 	 }
+	 
+	 @GetMapping(path = "/search/{name}", produces = "application/json")
+	 public List<User> search(@PathVariable String name) {
+	     return repo.searchUsers(name);
+	 }
    
 	 
 }
