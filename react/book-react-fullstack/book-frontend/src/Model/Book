@@ -1,0 +1,13 @@
+import React from 'react';
+
+function Book({ book }) {
+  return (
+    <div>
+      <h2>{book.id}</h2>
+      <h3>{book.title}</h3>
+      <p>{book.price}</p>
+    </div>
+  );
+}
+
+export default Book;

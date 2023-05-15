@@ -1,0 +1,23 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #18c5df;
+    height: 80px;
+    padding: 0 60px;
+  }
+  
+  .navbar-nav {
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+  }
+  
+  .nav-item {
+    margin-right: 20px;
+  }
+  
+  .nav-link {
+    color: #fff;
+    text-decoration: none;
+  }
